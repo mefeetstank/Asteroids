@@ -15,19 +15,19 @@ public class Asteroid : MonoBehaviour
 
     private void Awake()
     {
-       _spriteRenderer = GetComponent<SpriteRenderer>();
-       _rigidbody = GetComponent<Rigidbody2D>();
+      _spriteRenderer = GetComponent<SpriteRenderer>();
+      _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
     {
       
-       _spriteRenderer.sprite = sprites[Random.Range(0,  sprites.Length)];
+      _spriteRenderer.sprite = sprites[Random.Range(0,  sprites.Length)];
 
-       this.transform.eulerAngles = new Vector3(0.0f, 0.0f, Random.value * 360.0f);
-       this.transform.localScale =Vector3.one * this.size;
+      this.transform.eulerAngles = new Vector3(0.0f, 0.0f, Random.value * 360.0f);
+      this.transform.localScale =Vector3.one * this.size;
 
-       _rigidbody.mass = this.size;
+      _rigidbody.mass = this.size;
     }
 
     public void SetTrajectory(Vector2 direction)
@@ -43,10 +43,12 @@ public class Asteroid : MonoBehaviour
       {
          if ((this.size * 0.5) >= this.minSize)
          {
-             CreateSplit();
-             CreateSplit();
+            CreateSplit();
+            CreateSplit();
          }
+         FindObjectOfType<GameManager>().AsteroidDestroyed(this);
          Destroy(this.gameObject); 
+         
       }
        
    }
